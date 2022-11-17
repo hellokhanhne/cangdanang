@@ -1,4 +1,4 @@
-import { Col, Row, Select } from "antd";
+import { Select } from "antd";
 import { memo, useEffect, useState } from "react";
 import QrReader from "react-qr-scanner";
 

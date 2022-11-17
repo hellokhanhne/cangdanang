@@ -7,7 +7,7 @@ import {
   where,
 } from "firebase/firestore";
 import moment from "moment";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import Scanner from "./components/scanner";
@@ -83,6 +83,27 @@ function App() {
     },
     [setUserCurrent]
   );
+
+  useEffect(() => {
+    if (navigator.getUserMedia) {
+      navigator.getUserMedia(
+        {
+          video: true,
+        },
+        function (localMediaStream) {
+          console.log(localMediaStream);
+        },
+        function (err) {
+          alert(
+            "The following error occurred when trying to access the camera: " +
+              err
+          );
+        }
+      );
+    } else {
+      alert("Sorry, browser does not support camera access");
+    }
+  }, []);
 
   return (
     <div className={` main-wrapper position-relative`}>

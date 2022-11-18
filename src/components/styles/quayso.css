@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+.random {
+  display: flex;
+  width: 100%;
+  padding: 0 10vw;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.random .ticket {
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  /* border: 1px solid #ef5658; */
+  width: 47%;
+  margin: 2vh 0;
+  font-family: "Montserrat", sans-serif;
+}
+.random .ticket .stub,
+.random .ticket .check {
+  box-sizing: border-box;
+}
+.random .stub {
+  flex: 1;
+  background: #fff;
+  position: relative;
+  /* border: 1px solid #ef5658; */
+  border-left: none;
+  /* margin-left: -1px; */
+  height: 11.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.random .stub:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top: 20px solid #dd3f3e;
+  border-left: 20px solid #fff;
+  width: 0;
+}
+.random .stub:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-bottom: 20px solid #dd3f3e;
+  border-left: 20px solid #fff;
+  width: 0;
+}
+
+.random .check {
+  background: #fff;
+  width: 60%;
+  padding: 1.3vw;
+  height: 11.5vh;
+  position: relative;
+  /* border: 1px solid #ef5658; */
+  border-right: none;
+  display: flex;
+  align-items: center;
+}
+.random .check:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top: 20px solid #dd3f3e;
+  border-right: 20px solid #fff;
+  width: 0;
+}
+.random .check:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-bottom: 20px solid #dd3f3e;
+  border-right: 20px solid #fff;
+  width: 0;
+}
+.random .check .big {
+  font-size: 1.35vw;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #dd3f3e;
+}
+
+.quay-ngay-button {
+  outline: none;
+  cursor: pointer;
+  width: 4vw;
+  height: 4vw;
+  background-color: #fff;
+  border-radius: 50%;
+  color: #dd3f3e;
+  border: 1px solid #dd3f3e;
+}
+
+.quay-ngay-button:hover {
+  opacity: 0.7;
+}

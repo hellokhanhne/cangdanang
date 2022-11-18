@@ -69,7 +69,6 @@ const CoCauGiaiThuongModal = ({ modalIsOpen, setIsOpen }) => {
     const unsub = onSnapshot(
       doc(db, "dsgiaithuong", "cocaugiaithuong"),
       (doc) => {
-        console.log(doc.data());
         setListPrize(doc.data());
       }
     );

@@ -91,18 +91,6 @@ function ListCheckIn() {
     };
   }, [unit, tabs, isJoin]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const querySnapshot = await getDocs(collection(db, "units"));
-  //     const data = [];
-  //     querySnapshot.forEach((doc) => {
-  //       data.push(doc.data().value);
-  //     });
-  //     data.sort((a, b) => a.localeCompare(b));
-  //     setTabs(data);
-  //   })();
-  // }, []);
-
   return (
     <div className={` main-wrapper-thong-ke`}>
       <div
@@ -175,8 +163,9 @@ function ListCheckIn() {
               className="w-100 "
               style={{
                 maxHeight: "56.25vh",
-                overflowY: "scroll",
+                overflowY: "auto",
                 marginTop: "3vh",
+                paddingRight: "1rem",
               }}
             >
               <table

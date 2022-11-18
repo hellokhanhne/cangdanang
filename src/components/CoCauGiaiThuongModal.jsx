@@ -86,47 +86,49 @@ const CoCauGiaiThuongModal = ({ modalIsOpen, setIsOpen }) => {
       footer={[]}
     >
       <div>
-        {Object.entries(listPrize)
-          .sort(
-            ([_k1, v1], [_k2, v2]) => Number(v1.quanlity) - Number(v2.quanlity)
-          )
-          .map(([key, value]) => {
-            return (
-              <div className="d-flex mb-3" key={key}>
-                <input
-                  className="form-control me-2"
-                  placeholder="Tên giải thưởng"
-                  type="text"
-                  disabled={!value.isEnable}
-                  onChange={(e) => handleChange(key, "name", e)}
-                  name={`name-${key}`}
-                  value={value.name}
-                />
-                <input
-                  className="form-control me-2"
-                  type="number"
-                  placeholder="Số lượng"
-                  disabled={!value.isEnable}
-                  onChange={(e) => handleChange(key, "quanlity", e)}
-                  name={`quanlity-${key}`}
-                  value={value.quanlity}
-                />
+        {listPrize &&
+          Object.entries(listPrize)
+            .sort(
+              ([_k1, v1], [_k2, v2]) =>
+                Number(v1.quanlity) - Number(v2.quanlity)
+            )
+            .map(([key, value]) => {
+              return (
+                <div className="d-flex mb-3" key={key}>
+                  <input
+                    className="form-control me-2"
+                    placeholder="Tên giải thưởng"
+                    type="text"
+                    disabled={!value.isEnable}
+                    onChange={(e) => handleChange(key, "name", e)}
+                    name={`name-${key}`}
+                    value={value.name}
+                  />
+                  <input
+                    className="form-control me-2"
+                    type="number"
+                    placeholder="Số lượng"
+                    disabled={!value.isEnable}
+                    onChange={(e) => handleChange(key, "quanlity", e)}
+                    name={`quanlity-${key}`}
+                    value={value.quanlity}
+                  />
 
-                <button
-                  className="btn btn-sm btn-warning me-2"
-                  onClick={() => handleEnable(key)}
-                >
-                  {value.isEnable ? "Ok" : "Sửa"}
-                </button>
-                <button
-                  className="btn btn-sm btn-danger text-white"
-                  onClick={() => handleDeletePrize(key)}
-                >
-                  Xóa
-                </button>
-              </div>
-            );
-          })}
+                  <button
+                    className="btn btn-sm btn-warning me-2"
+                    onClick={() => handleEnable(key)}
+                  >
+                    {value.isEnable ? "Ok" : "Sửa"}
+                  </button>
+                  <button
+                    className="btn btn-sm btn-danger text-white"
+                    onClick={() => handleDeletePrize(key)}
+                  >
+                    Xóa
+                  </button>
+                </div>
+              );
+            })}
         <div
           className="d-flex align-items-center"
           style={{

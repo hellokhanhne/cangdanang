@@ -10,20 +10,22 @@ function ChaoMung() {
   const [count, setCount] = useState(1);
 
   useEffect(() => {
-    if (count > 10) {
-      if (index === listAttend.length - 1) {
-        setIndex(0);
-        setUserCurrent(listAttend[index]);
-        setCount(1);
+    if (listAttend.length > 0) {
+      if (count > 10) {
+        if (index === listAttend.length - 1) {
+          setIndex(0);
+          setUserCurrent(listAttend[index]);
+          setCount(1);
+        } else {
+          setIndex((i) => i + 1);
+          setUserCurrent(listAttend[index]);
+          setCount(1);
+        }
       } else {
-        setIndex((i) => i + 1);
-        setUserCurrent(listAttend[index]);
-        setCount(1);
+        setTimeout(() => {
+          setCount((c) => c + 1);
+        }, 1000);
       }
-    } else {
-      setTimeout(() => {
-        setCount((c) => c + 1);
-      }, 1000);
     }
   }, [count]);
 

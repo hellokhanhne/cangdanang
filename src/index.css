@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
 *,
 *:before,
 *:after {
@@ -24,6 +24,7 @@ body {
 .font-large {
   font-size: 2.25vw;
   font-weight: bold;
+  font-family: "Montserrat", sans-serif;
 }
 
 .text-red {
@@ -40,6 +41,10 @@ body {
 
 .text-pink {
   color: #ff3399;
+}
+
+.text-red.cyen {
+  color: #dd3f3e;
 }
 
 .text-blue {

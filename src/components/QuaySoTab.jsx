@@ -1,11 +1,13 @@
 import { doc, onSnapshot } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { db } from "../firebase";
 
 import "./styles/quayso.css";
 
 const QuaySoTab = () => {
   const [listPrize, setListPrize] = useState({});
+  const [dataRadom, setDataRandom] = useState([]);
+
   useEffect(() => {
     const unsub = onSnapshot(
       doc(db, "dsgiaithuong", "cocaugiaithuong"),
@@ -19,6 +21,8 @@ const QuaySoTab = () => {
   }, []);
 
   const handleQuayGiai = () => {};
+
+  const randomFunc = useCallback(() => {}, [dataRadom]);
 
   return (
     <div
@@ -34,7 +38,7 @@ const QuaySoTab = () => {
           {Object.entries(listPrize)
             .sort(
               ([_k1, v1], [_k2, v2]) =>
-                Number(v1.quanlity) - Number(v2.quanlity)
+                Number(v2.quanlity) - Number(v1.quanlity)
             )
 
             .map(([key, value]) => {

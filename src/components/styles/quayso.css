@@ -35,8 +35,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  border-top: 20px solid #dd3f3e;
-  border-left: 20px solid #fff;
+  border-top: 0.75vw solid #dd3f3e;
+  border-left: 0.75vw solid #fff;
   width: 0;
 }
 .random .stub:after {
@@ -44,8 +44,8 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  border-bottom: 20px solid #dd3f3e;
-  border-left: 20px solid #fff;
+  border-bottom: 0.75vw solid #dd3f3e;
+  border-left: 0.75vw solid #fff;
   width: 0;
 }
 
@@ -65,8 +65,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  border-top: 20px solid #dd3f3e;
-  border-right: 20px solid #fff;
+  border-top: 0.75vw solid #dd3f3e;
+  border-right: 0.75vw solid #fff;
   width: 0;
 }
 .random .check:after {
@@ -74,8 +74,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  border-bottom: 20px solid #dd3f3e;
-  border-right: 20px solid #fff;
+  border-bottom: 0.75vw solid #dd3f3e;
+  border-right: 0.75vw solid #fff;
   width: 0;
 }
 .random .check .big {
@@ -94,9 +94,23 @@
   background-color: #fff;
   border-radius: 50%;
   color: #dd3f3e;
+  font-size: 0.85vw;
   border: 1px solid #dd3f3e;
 }
 
 .quay-ngay-button:hover {
   opacity: 0.7;
+}
+
+.modal-chuc-mung-giai {
+  animation: modal-zoom 0.2s linear;
+}
+
+@keyframes modal-zoom {
+  0% {
+    scale: 1.25;
+  }
+  100% {
+    scale: 1;
+  }
 }

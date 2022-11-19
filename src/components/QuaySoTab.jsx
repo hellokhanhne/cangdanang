@@ -98,7 +98,7 @@ const QuaySoTab = () => {
                 }}
               >
                 <div
-                  className=""
+                  className="modal-chuc-mung-giai"
                   style={{
                     minWidth: "30vw",
                     background: "rgba(255,255,255,.9)",

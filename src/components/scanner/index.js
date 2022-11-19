@@ -34,11 +34,7 @@ function Scanner({ onScan }) {
       {/* <Col span={24}> */}
       <Select
         className="w-100"
-        style={
-          {
-            // height: "5vh",
-          }
-        }
+        style={{}}
         value={device?.deviceId || ""}
         onChange={(value) =>
           setDevice(devices.find((d) => d.deviceId === value))

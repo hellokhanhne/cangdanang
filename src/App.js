@@ -17,26 +17,8 @@ import headImage from "../src/assets/TenCTr.png";
 
 function App() {
   const [userCurrent, setUserCurrent] = useState(null);
-  // const [listAttend, setListAttend] = useState([]);
 
   const prev = useRef("");
-
-  // useEffect(() => {
-  //   const q = query(collection(db, "checkIns_test_5"));
-
-  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //     const arr = [];
-  //     querySnapshot.forEach((doc) => {
-  //       arr.push(doc.data());
-  //     });
-  //     arr.sort((a, b) => b.checkIn - a.checkIn);
-
-  //     setListAttend(arr);
-  //   });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
 
   const scan = useCallback(
     async (value) => {
@@ -46,8 +28,6 @@ function App() {
       }
       prev.current = value;
 
-      // console.log(value);
-
       const q = query(
         collection(db, "users"),
         where("qrcode", "==", value || "")
@@ -55,7 +35,6 @@ function App() {
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach(async (_doc) => {
-        // console.log(_doc.data())
         const date = moment().valueOf();
         const dateString = moment(date).format("DD-MM-YYYY").toString();
         setUserCurrent({ ..._doc.data(), checkIn: date });
@@ -73,7 +52,6 @@ function App() {
           }
         }
         if (!checkExist) {
-          // console.log("zoo");
           await setDoc(doc(db, "checkIns_test_5", uuidv4()), {
             ..._doc.data(),
             checkIn: date,
@@ -122,19 +100,13 @@ function App() {
         <div
           className="w-100  d-flex justify-content-center align-items-center"
           style={{
-            marginBottom: "4vh",
+            marginBottom: "5.5vh",
           }}
         >
           <div
             className="d-flex flex-column"
             style={{
               width: "35%",
-              height: "52vh",
-              display: "flex",
-              alignItems: "center",
-              objectFit: "cover",
-              borderRadius: "1rem",
-              border: ".5vw solid #fce500",
             }}
           >
             <Scanner onScan={scan} />
@@ -143,11 +115,9 @@ function App() {
             className="d-flex align-items-center"
             style={{
               width: "40%",
-              height: "52vh",
+              maxHeight: "50vh",
               padding: "1vh 1vw",
-              objectFit: "fill",
-              borderRadius: "1rem",
-              overflow: "hidden",
+              overflow: "auto",
               marginLeft: "5.5vw",
             }}
           >

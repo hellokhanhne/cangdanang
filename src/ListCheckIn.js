@@ -92,7 +92,12 @@ function ListCheckIn() {
   }, [unit, tabs, isJoin]);
 
   return (
-    <div className={` main-wrapper-thong-ke`}>
+    <div
+      className={` main-wrapper-thong-ke`}
+      style={{
+        fontFamily: `"Montserrat", sans-serif`,
+      }}
+    >
       <div
         className="h-100"
         style={{
@@ -116,26 +121,29 @@ function ListCheckIn() {
           />
         </div>
         <div className="d-flex">
-          <div className="flex-1">
+          <div
+            className="flex-1"
+            style={{
+              paddingRight: "20px",
+            }}
+          >
             <div className="title-wrapper">
               {" "}
-              {/* <h2 className="border-text-blue">DANH SÁCH ĐẠI BIỂU</h2> */}
               <div
                 style={{
-                  width: "52vw",
                   alignItems: "center",
                 }}
                 className="d-flex"
               >
                 <select
-                  className="form-select w-100 "
+                  className="form-select form-select-sm w-100 "
                   value={unit}
                   onChange={(e) => {
                     setUnit(e.target.value);
                   }}
                 >
                   <option value="All">Tất cả các bàn</option>
-                  {/* <option value="Đoàn TNCS Hồ Chí Minh Huyện Hòa Vang">"Đoàn TNCS Hồ Chí Minh Huyện Hòa Vang"</option> */}
+
                   {tabs.map((t) => (
                     <option value={t} key={t}>
                       Bàn số {t}
@@ -165,7 +173,6 @@ function ListCheckIn() {
                 maxHeight: "56.25vh",
                 overflowY: "auto",
                 marginTop: "3vh",
-                paddingRight: "1rem",
               }}
             >
               <table

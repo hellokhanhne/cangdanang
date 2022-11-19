@@ -6,11 +6,12 @@ import {
   query,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import closeImage from "../assets/close.png";
+import congra from "../assets/congra.gif";
 import { db } from "../firebase";
 import CongratulationOverlay from "./CongratulationOverlay";
+import OverlayV2 from "./Overlayv2";
 import OverlayWrapper from "./OverlayWrapper";
-import congra from "../assets/congra.gif";
-import closeImage from "../assets/close.png";
 
 import "./styles/quayso.css";
 
@@ -19,6 +20,7 @@ const QuaySoTab = () => {
   const [dataRadom, setDataRandom] = useState([]);
   const [winer, setWiner] = useState(null);
   const [isLoadingRandom, setIsLoadingRandom] = useState(false);
+  const [giai, setGiai] = useState("");
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -57,13 +59,18 @@ const QuaySoTab = () => {
   }, []);
 
   const handleQuayGiai = (key, value) => {
+    setGiai(value.name);
     setIsLoadingRandom(true);
     const winUser = randomFunc();
-    dataRadom.filter((d) => d.qrcode !== winUser.qrcode);
-    setWiner({
-      ...winUser,
-      tengiaithuong: value?.name,
-    });
+    window.startRadmonLuckyNumber(winUser?.somayman);
+    setTimeout(() => {
+      setIsLoadingRandom(false);
+      dataRadom.filter((d) => d.qrcode !== winUser.qrcode);
+      setWiner((w) => ({
+        ...winUser,
+        tengiaithuong: value?.name,
+      }));
+    }, 16000);
   };
 
   const randomFunc = () => {
@@ -79,6 +86,47 @@ const QuaySoTab = () => {
         marginTop: "5vh",
       }}
     >
+      <OverlayV2 visiable={isLoadingRandom}>
+        <div
+          className="w-100 h-100"
+          style={{
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              background: "#fff",
+              padding: "1.3vw",
+              borderRadius: ".5vw",
+              display: "flex",
+              left: "50%",
+              transform: "translateX(-50%)",
+              marginTop: "5vh",
+            }}
+          >
+            <h2
+              className="font-large text-center border-text-white text-orange m-auto"
+              style={{
+                textTransform: "uppercase",
+                fontSize: "2.25vw",
+                lineHeight: 1.35,
+                fontWeight: 900,
+              }}
+            >
+              <span className="text-red cyen">ĐANG QUAY {giai}</span>
+            </h2>
+          </div>
+          <div
+            id="lotteryMachine"
+            className="d-flex justify-content-center align-items-center h-100 flex-column"
+            style={{
+              paddingTop: "10vh",
+            }}
+          ></div>
+        </div>
+      </OverlayV2>
+
       {winer && (
         <OverlayWrapper>
           <div
@@ -159,6 +207,20 @@ const QuaySoTab = () => {
                   >
                     <span className="text-red cyen">
                       {winer?.nguoidaidien || "----------------"}
+                    </span>
+                  </h2>
+                  <h2
+                    className="font-large text-center border-text-white text-orange"
+                    style={{
+                      textTransform: "uppercase",
+                      marginBottom: "1.15vh",
+                      fontSize: "2.25vw",
+                      lineHeight: 1.35,
+                      fontWeight: 900,
+                    }}
+                  >
+                    <span className="text-red cyen">
+                      {winer?.tencongty || "----------------"}
                     </span>
                   </h2>
                   <h2

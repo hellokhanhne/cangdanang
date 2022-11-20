@@ -64,9 +64,11 @@ const QuaySoTab = () => {
     setGiai(value.name);
     setIsLoadingRandom(true);
     const winUser = randomFunc();
+    document.getElementById("lotteryMachine").style.display = "flex";
     window.startRadmonLuckyNumber(winUser?.somayman);
     setTimeout(async () => {
       setIsLoadingRandom(false);
+      document.getElementById("lotteryMachine").style.display = "none";
       setDataRandom(dataRadom.filter((d) => d.qrcode !== winUser.qrcode));
       setWiner((w) => ({
         ...winUser,
@@ -125,13 +127,13 @@ const QuaySoTab = () => {
               <span className="text-red cyen">ĐANG QUAY {giai}</span>
             </h2>
           </div>
-          <div
+          {/* <div
             id="lotteryMachine"
             className="d-flex justify-content-center align-items-center h-100 flex-column"
             style={{
               paddingTop: "10vh",
             }}
-          ></div>
+          ></div> */}
         </div>
       </OverlayV2>
 

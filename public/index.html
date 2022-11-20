@@ -20,16 +20,27 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div
+      id="lotteryMachine"
+      style="
+        position: fixed;
+        top: 50%;
+        z-index: 999999;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+      "
+      class="justify-content-center flex-column align-items-center"
+    ></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script
-      async
       src="./index.js"
       url="https://www.jaypung.com/js/luckyball/lotteryMachine.min.js"
     ></script>
     <script>
       $(function () {
         var machine = $("#lotteryMachine").lotteryMachine({
-          containerRadius: window.innerWidth / 10,
+          containerRadius: Math.round(window.innerWidth / 10),
           waitInterval: 0,
           playSound: false,
           callback: function (data) {},

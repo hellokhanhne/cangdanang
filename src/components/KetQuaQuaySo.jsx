@@ -1,4 +1,11 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 
@@ -7,6 +14,9 @@ const KetQuaQuaySo = () => {
   useEffect(() => {
     const q = query(collection(db, "dstrunggiai"), orderBy("tengiaithuong"));
     const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+      for (let d of querySnapshot.docs) {
+        await deleteDoc(doc(db, "dstrunggiai", d.id));
+      }
       setDsTrungGiai(
         querySnapshot.docs.map((d) => ({
           id: d.id,

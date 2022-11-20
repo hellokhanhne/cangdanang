@@ -1,13 +1,11 @@
 import { Button } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import titleImg from "./assets/TenCTr.3.png";
 import KetQuaQuaySo from "./components/KetQuaQuaySo";
 import QuaySoTab from "./components/QuaySoTab";
 
 function QuaySo() {
   const [tab, setTab] = useState(1);
-
-  useEffect(() => {}, []);
 
   return (
     <div className={` main-wrapper-thong-ke`}>

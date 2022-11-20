@@ -1,7 +1,24 @@
-import React, { useState } from "react";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { db } from "../firebase";
 
 const KetQuaQuaySo = () => {
   const [dsTrungGiai, setDsTrungGiai] = useState([]);
+  useEffect(() => {
+    const q = query(collection(db, "dstrunggiai"), orderBy("tengiaithuong"));
+    const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+      setDsTrungGiai(
+        querySnapshot.docs.map((d) => ({
+          id: d.id,
+          ...d.data(),
+        }))
+      );
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return (
     <div
       className="w-100 "
@@ -35,7 +52,7 @@ const KetQuaQuaySo = () => {
               <td>{l.nguoidaidien}</td>
               <td>{l.tencongty}</td>
               <td>{l.somayman}</td>
-              <td>{l.giaithuong}</td>
+              <td>{l.tengiaithuong}</td>
             </tr>
           ))}
         </tbody>
@@ -45,3 +62,8 @@ const KetQuaQuaySo = () => {
 };
 
 export default KetQuaQuaySo;
+
+// DELETE ALL DATY IN COLLECTION
+// for (let d of querySnapshot.docs) {
+//   await deleteDoc(doc(db, "dstrunggiai", d.id));
+// }

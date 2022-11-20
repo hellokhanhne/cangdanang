@@ -4,6 +4,7 @@ import {
   getDocs,
   onSnapshot,
   query,
+  setDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import closeImage from "../assets/close.png";
@@ -12,6 +13,7 @@ import { db } from "../firebase";
 import CongratulationOverlay from "./CongratulationOverlay";
 import OverlayV2 from "./Overlayv2";
 import OverlayWrapper from "./OverlayWrapper";
+import { v4 as uuidv4 } from "uuid";
 
 import "./styles/quayso.css";
 
@@ -47,7 +49,7 @@ const QuaySoTab = () => {
         return (
           !dsTrungGiaiSnap.docs.find((d) => d.data().qrcode === u.qrcode) &&
           u.somayman &&
-          u.somayman != ""
+          u.somayman !== ""
         );
       });
       setDataRandom(setUnitArr);
@@ -63,13 +65,19 @@ const QuaySoTab = () => {
     setIsLoadingRandom(true);
     const winUser = randomFunc();
     window.startRadmonLuckyNumber(winUser?.somayman);
-    setTimeout(() => {
+    setTimeout(async () => {
       setIsLoadingRandom(false);
-      dataRadom.filter((d) => d.qrcode !== winUser.qrcode);
+      setDataRandom(dataRadom.filter((d) => d.qrcode !== winUser.qrcode));
       setWiner((w) => ({
         ...winUser,
         tengiaithuong: value?.name,
       }));
+      const prizeRef = doc(db, "dstrunggiai", uuidv4());
+      setDoc(prizeRef, {
+        ...winUser,
+        tengiaithuong: value?.name,
+        idGiaiThuong: key,
+      });
     }, 16000);
   };
 

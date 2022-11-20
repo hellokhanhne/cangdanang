@@ -325,12 +325,12 @@
       : g.init.apply(this, arguments);
   };
 })(jQuery);
-
 /* eslint-disable */
 
 window.startRadmonLuckyNumber = function start(winNumber) {
-  console.log(winNumber);
   setTimeout(() => {
-    $("#lotteryMachine").lotteryMachine("run", winNumber);
+    if (typeof $("#lotteryMachine")?.lotteryMachine === "function") {
+      $("#lotteryMachine").lotteryMachine("run", winNumber);
+    }
   }, 500);
 };

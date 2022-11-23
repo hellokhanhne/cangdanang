@@ -17,7 +17,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import "./styles/quayso.css";
 
-const QuaySoTab = () => {
+const QuaySoTab = ({ dsTrungGiai }) => {
   const [listPrize, setListPrize] = useState({});
   const [dataRadom, setDataRandom] = useState([]);
   const [winer, setWiner] = useState(null);
@@ -61,6 +61,9 @@ const QuaySoTab = () => {
   }, []);
 
   const handleQuayGiai = (key, value) => {
+    if (dataRadom.length < 1) {
+      return alert("Không còn số may mắn để tiếp tục random !");
+    }
     setGiai(value.name);
     setIsLoadingRandom(true);
     const winUser = randomFunc();
@@ -281,10 +284,16 @@ const QuaySoTab = () => {
               return (
                 <div className="ticket" key={key}>
                   <div className="check">
-                    <div className="big">{value.name}</div>
+                    <div className="flex-1">
+                      <div className="big">{value.name}</div>
+                    </div>
+                    <div className="small">
+                      Số lượng giải còn lại : {value.quanlity}
+                    </div>
                   </div>
                   <div className="stub">
                     <button
+                      // disabled
                       className="quay-ngay-button"
                       onClick={() => handleQuayGiai(key, value)}
                     >

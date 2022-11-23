@@ -52,13 +52,14 @@
 .random .check {
   background: #fff;
   width: 60%;
-  padding: 1.3vw;
+  padding: 1vw 1.2vw;
   height: 11.5vh;
   position: relative;
   /* border: 1px solid #ef5658; */
   border-right: none;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  flex-direction: column;
 }
 .random .check:before {
   content: "";
@@ -84,6 +85,15 @@
   line-height: 1.2;
   text-transform: uppercase;
   color: #dd3f3e;
+  margin-bottom: 0.5vh;
+}
+
+.random .check .small {
+  color: #777;
+  font-size: 0.85vw;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .quay-ngay-button {

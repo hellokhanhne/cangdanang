@@ -1,34 +1,6 @@
-import {
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
+import React from "react";
 
-const KetQuaQuaySo = () => {
-  const [dsTrungGiai, setDsTrungGiai] = useState([]);
-  useEffect(() => {
-    const q = query(collection(db, "dstrunggiai"), orderBy("tengiaithuong"));
-    const unsubscribe = onSnapshot(q, async (querySnapshot) => {
-      for (let d of querySnapshot.docs) {
-        await deleteDoc(doc(db, "dstrunggiai", d.id));
-      }
-      setDsTrungGiai(
-        querySnapshot.docs.map((d) => ({
-          id: d.id,
-          ...d.data(),
-        }))
-      );
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+const KetQuaQuaySo = ({ dsTrungGiai }) => {
   return (
     <div
       className="w-100 "

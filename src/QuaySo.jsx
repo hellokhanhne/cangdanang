@@ -1,11 +1,40 @@
 import { Button } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import titleImg from "./assets/TenCTr.3.png";
 import KetQuaQuaySo from "./components/KetQuaQuaySo";
 import QuaySoTab from "./components/QuaySoTab";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { db } from "./firebase";
 
 function QuaySo() {
   const [tab, setTab] = useState(1);
+
+  const [dsTrungGiai, setDsTrungGiai] = useState([]);
+  useEffect(() => {
+    const q = query(collection(db, "dstrunggiai"), orderBy("tengiaithuong"));
+    const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+      for (let d of querySnapshot.docs) {
+        await deleteDoc(doc(db, "dstrunggiai", d.id));
+      }
+      setDsTrungGiai(
+        querySnapshot.docs.map((d) => ({
+          id: d.id,
+          ...d.data(),
+        }))
+      );
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <div className={` main-wrapper-thong-ke`}>
@@ -62,8 +91,8 @@ function QuaySo() {
               </div>
             </div>
 
-            {tab === 1 && <QuaySoTab />}
-            {tab === 2 && <KetQuaQuaySo />}
+            {tab === 1 && <QuaySoTab dsTrungGiai={dsTrungGiai} />}
+            {tab === 2 && <KetQuaQuaySo dsTrungGiai={dsTrungGiai} />}
           </div>
         </div>
       </div>

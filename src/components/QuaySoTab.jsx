@@ -19,6 +19,7 @@ import "./styles/quayso.css";
 
 const QuaySoTab = ({ dsTrungGiai }) => {
   const [listPrize, setListPrize] = useState({});
+  const [giaiConLai, setGiaiConLai] = useState({});
   const [dataRadom, setDataRandom] = useState([]);
   const [winer, setWiner] = useState(null);
   const [isLoadingRandom, setIsLoadingRandom] = useState(false);
@@ -85,6 +86,20 @@ const QuaySoTab = ({ dsTrungGiai }) => {
       });
     }, 16000);
   };
+
+  useEffect(() => {
+    if (dsTrungGiai?.length > 0) {
+      const demDsGiai = dsTrungGiai.reduce((current, value) => {
+        if (current[value.tengiaithuong]) {
+          current[value.tengiaithuong] = current[value.tengiaithuong] + 1;
+        } else {
+          current[value.tengiaithuong] = 1;
+        }
+        return current;
+      }, {});
+      setGiaiConLai(demDsGiai);
+    }
+  }, [dsTrungGiai]);
 
   const randomFunc = () => {
     return dataRadom[Math.floor(Math.random() * dataRadom.length)];
@@ -288,12 +303,19 @@ const QuaySoTab = ({ dsTrungGiai }) => {
                       <div className="big">{value.name}</div>
                     </div>
                     <div className="small">
-                      Số lượng giải còn lại : {value.quanlity}
+                      Số lượng giải còn lại :{" "}
+                      {Number(value.quanlity) - (giaiConLai[value.name] || 0)}
                     </div>
                   </div>
                   <div className="stub">
                     <button
-                      // disabled
+                      disabled={
+                        !(
+                          Number(value.quanlity) -
+                            (giaiConLai[value.name] || 0) >
+                          0
+                        )
+                      }
                       className="quay-ngay-button"
                       onClick={() => handleQuayGiai(key, value)}
                     >

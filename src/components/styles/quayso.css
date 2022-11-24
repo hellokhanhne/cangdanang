@@ -112,6 +112,11 @@
   opacity: 0.7;
 }
 
+.quay-ngay-button:disabled {
+  color: #777;
+  border-color: #777;
+}
+
 .modal-chuc-mung-giai {
   animation: modal-zoom 0.2s linear;
 }

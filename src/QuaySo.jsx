@@ -1,16 +1,9 @@
 import { Button } from "antd";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import titleImg from "./assets/TenCTr.3.png";
 import KetQuaQuaySo from "./components/KetQuaQuaySo";
 import QuaySoTab from "./components/QuaySoTab";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
 import { db } from "./firebase";
 
 function QuaySo() {
@@ -20,9 +13,9 @@ function QuaySo() {
   useEffect(() => {
     const q = query(collection(db, "dstrunggiai"), orderBy("tengiaithuong"));
     const unsubscribe = onSnapshot(q, async (querySnapshot) => {
-      for (let d of querySnapshot.docs) {
-        await deleteDoc(doc(db, "dstrunggiai", d.id));
-      }
+      // for (let d of querySnapshot.docs) {
+      //   await deleteDoc(doc(db, "dstrunggiai", d.id));
+      // }
       setDsTrungGiai(
         querySnapshot.docs.map((d) => ({
           id: d.id,

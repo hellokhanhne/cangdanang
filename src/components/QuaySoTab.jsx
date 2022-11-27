@@ -15,6 +15,9 @@ import OverlayV2 from "./Overlayv2";
 import OverlayWrapper from "./OverlayWrapper";
 import { v4 as uuidv4 } from "uuid";
 
+import giaithuongL from "../assets/giaithuong.png";
+import giaithuongR from "../assets/giaithuong1.png";
+
 import "./styles/quayso.css";
 
 const QuaySoTab = ({ dsTrungGiai }) => {
@@ -111,7 +114,7 @@ const QuaySoTab = ({ dsTrungGiai }) => {
       style={{
         maxHeight: "55vh",
         overflowY: "auto",
-        marginTop: "5vh",
+        marginTop: "1vh",
       }}
     >
       <OverlayV2 visiable={isLoadingRandom}>
@@ -295,33 +298,81 @@ const QuaySoTab = ({ dsTrungGiai }) => {
                 Number(v2.quanlity) - Number(v1.quanlity)
             )
 
-            .map(([key, value]) => {
+            .map(([key, value], index) => {
               return (
-                <div className="ticket" key={key}>
-                  <div className="check">
-                    <div className="flex-1">
-                      <div className="big">{value.name}</div>
-                    </div>
+                // <div className="ticket" key={key}>
+                //   <div className="check">
+                //     <div className="flex-1">
+                //       <div className="big">{value.name}</div>
+                //     </div>
+                //     <div className="small">
+                //       Số lượng giải còn lại :{" "}
+                //       {Number(value.quanlity) - (giaiConLai[value.name] || 0)}
+                //     </div>
+                //   </div>
+                //   <div className="stub">
+                //     <button
+                //       disabled={
+                //         !(
+                //           Number(value.quanlity) -
+                //             (giaiConLai[value.name] || 0) >
+                //           0
+                //         )
+                //       }
+                //       className="quay-ngay-button"
+                //       onClick={() => handleQuayGiai(key, value)}
+                //     >
+                //       Quay
+                //     </button>
+                //   </div>
+                // </div>
+                <div
+                  style={{
+                    width: "48%",
+                    marginBottom: "2vh",
+                    position: "relative",
+                  }}
+                  className="item-quay-so"
+                >
+                  <img
+                    className="w-100"
+                    src={index % 2 === 0 ? giaithuongL : giaithuongR}
+                    alt=""
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      left: index % 2 === 0 ? 0 : "none",
+                      right: index % 2 !== 0 ? 0 : "none",
+                      textAlign: "center",
+                      width: "80%",
+                    }}
+                  >
+                    <div className="big">{value.name}</div>
                     <div className="small">
                       Số lượng giải còn lại :{" "}
                       {Number(value.quanlity) - (giaiConLai[value.name] || 0)}
                     </div>
                   </div>
-                  <div className="stub">
-                    <button
-                      disabled={
-                        !(
-                          Number(value.quanlity) -
-                            (giaiConLai[value.name] || 0) >
-                          0
-                        )
-                      }
-                      className="quay-ngay-button"
-                      onClick={() => handleQuayGiai(key, value)}
-                    >
-                      Quay
-                    </button>
-                  </div>
+                  <div
+                    onClick={() => handleQuayGiai(key, value)}
+                    style={{
+                      position: "absolute",
+                      left: index % 2 !== 0 ? 0 : "none",
+                      right: index % 2 === 0 ? 0 : "none",
+                      top: 0,
+                      width: "20%",
+                      height: "100%",
+                      cursor: "pointer",
+                      pointerEvents:
+                        Number(value.quanlity) - (giaiConLai[value.name] || 0) >
+                        0
+                          ? "auto"
+                          : "none",
+                    }}
+                  ></div>
                 </div>
               );
             })}

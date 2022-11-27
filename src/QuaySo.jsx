@@ -1,11 +1,10 @@
-import { Button } from "antd";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import titleImg from "./assets/TenCTr.3.png";
+import ketquaquayso from "./assets/ketquaquayso.png";
+import quayso from "./assets/quayso.png";
 import KetQuaQuaySo from "./components/KetQuaQuaySo";
 import QuaySoTab from "./components/QuaySoTab";
 import { db } from "./firebase";
-
 function QuaySo() {
   const [tab, setTab] = useState(1);
 
@@ -30,13 +29,13 @@ function QuaySo() {
   }, []);
 
   return (
-    <div className={` main-wrapper-thong-ke`}>
+    <div className={` main-wrapper-thong-ke main-wrapper-quay-so`}>
       <div
         className="h-100"
         style={{
           paddingLeft: "10vw",
           paddingRight: "10vw",
-          paddingTop: "18vh",
+          paddingTop: "39vh",
         }}
       >
         <div
@@ -45,41 +44,66 @@ function QuaySo() {
             marginBottom: "7vh",
           }}
         >
-          <img
+          {/* <img
             src={titleImg}
             alt=""
             style={{
               maxWidth: "25vw",
             }}
-          />
+          /> */}
         </div>
         <div className="d-flex">
           <div className="flex-1">
-            <div className="title-wrapper">
+            <div className="title-wrapper mb-0">
               {" "}
               <div
                 style={{
                   alignItems: "center",
                   justifyContent: "center",
+                  marginTop: "1vh",
+                  marginBottom: "2vh",
                 }}
                 className="d-flex"
               >
                 <div className="d-flex ms-2 ">
-                  <Button
+                  <img
+                    style={{
+                      height: "6vh  ",
+                      marginRight: "1vw",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setTab(1)}
+                    src={quayso}
+                    alt=""
+                  />
+
+                  <img
+                    onClick={() => setTab(2)}
+                    style={{
+                      height: "6vh  ",
+                      marginLeft: "1vw",
+                      cursor: "pointer",
+                    }}
+                    src={ketquaquayso}
+                    alt=""
+                  />
+
+                  {/* <button
                     size="large"
                     onClick={() => setTab(1)}
                     type={tab === 1 ? "primary" : "dashed"}
-                    className="me-2"
+                    className="me-2 primary-button-main"
                   >
                     Quay số
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     size="large"
+                    className="primary-button-main"
                     onClick={() => setTab(2)}
                     type={tab === 2 ? "primary" : "dashed"}
                   >
                     Kết quả quay số
-                  </Button>
+                  </button> */}
                 </div>
               </div>
             </div>

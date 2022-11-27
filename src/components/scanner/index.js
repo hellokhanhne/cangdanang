@@ -1,7 +1,6 @@
-import { Select } from "antd";
 import { memo, useEffect, useState } from "react";
 import QrReader from "react-qr-scanner";
-
+import manhinhcheckin from "../../assets/manhinhcheckin.png";
 function Scanner({ onScan }) {
   const [devices, setDevices] = useState([]);
   const [device, setDevice] = useState(null);
@@ -32,7 +31,7 @@ function Scanner({ onScan }) {
   return (
     <div className="d-flex flex-column w-100 h-100">
       {/* <Col span={24}> */}
-      <Select
+      {/* <Select
         className="w-100"
         style={{}}
         value={device?.deviceId || ""}
@@ -45,20 +44,34 @@ function Scanner({ onScan }) {
             {item.label}
           </Select.Option>
         ))}
-      </Select>
+      </Select> */}
       {/* </Col> */}
       {device && (
         // <Col span={24}>
-        <QrReader
-          className="scanner"
-          constraints={{
-            video: { deviceId: device.deviceId },
+        <div
+          style={{
+            position: "relative",
           }}
-          delay={100}
-          onError={handleError}
-          onScan={handleScan}
-          onLoad={(value) => console.log("load", value)}
-        />
+        >
+          <img
+            style={{
+              width: "100%",
+              position: "absolute",
+            }}
+            src={manhinhcheckin}
+            alt=""
+          />
+          <QrReader
+            className="scanner"
+            constraints={{
+              video: { deviceId: device.deviceId },
+            }}
+            delay={100}
+            onError={handleError}
+            onScan={handleScan}
+            onLoad={(value) => console.log("load", value)}
+          />
+        </div>
         // </Col>
       )}
     </div>

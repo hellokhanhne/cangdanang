@@ -9,24 +9,26 @@ function ChaoMung() {
   const [index, setIndex] = useState(0);
   const [count, setCount] = useState(1);
 
+  console.log(userCurrent);
+  console.log(listAttend);
+
   useEffect(() => {
-    if (listAttend.length > 0) {
-      if (count > 10) {
-        if (index === listAttend.length - 1) {
-          setIndex(0);
-          setUserCurrent(listAttend[index]);
-          setCount(1);
-        } else {
-          setIndex((i) => i + 1);
-          setUserCurrent(listAttend[index]);
-          setCount(1);
-        }
+    if (count > 10) {
+      if (index === listAttend.length - 1) {
+        setIndex(0);
+        setUserCurrent(listAttend[index]);
+        setCount(1);
       } else {
-        setTimeout(() => {
-          setCount((c) => c + 1);
-        }, 1000);
+        setIndex((i) => i + 1);
+        setUserCurrent(listAttend[index]);
+        setCount(1);
       }
+    } else {
+      setTimeout(() => {
+        setCount((c) => c + 1);
+      }, 1000);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
@@ -52,12 +54,12 @@ function ChaoMung() {
           <div
             className="d-flex align-items-center"
             style={{
-              width: "55%",
+              width: "100%",
               objectFit: "fill",
               justifyContent: "center",
               borderRadius: "1rem",
               overflow: "hidden",
-              paddingTop: "15vh",
+              paddingTop: "37.5vh",
             }}
           >
             <ChaoMungComponent userCurrent={userCurrent} />

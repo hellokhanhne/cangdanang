@@ -1,5 +1,6 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"); */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap");
 *,
 *:before,
 *:after {
@@ -12,7 +13,7 @@
 
 body {
   margin: 0;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Barlow Condensed", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,7 +25,7 @@ body {
 .font-large {
   font-size: 2.25vw;
   font-weight: 900;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Barlow Condensed", sans-serif;
 }
 
 .text-red {
@@ -69,7 +70,7 @@ body {
 .main-wrapper,
 .main-wrapper-thong-ke,
 .chaomung-wrapper {
-  background-image: url("../src/assets/Nen18.11.png");
+  background-image: url("../src/assets/nencheckin.png");
   width: 100%;
   height: 100vh;
   background-size: 100%;
@@ -78,16 +79,11 @@ body {
 }
 
 .chaomung-wrapper {
-  background-image: url("../src/assets/Nen18.11.1.png");
+  background-image: url("../src/assets/nenchaomung.png");
 }
 
 .main-wrapper-thong-ke {
-  background-image: url("../src/assets/Nen18.11.1.png");
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  background-image: url("../src/assets/nenthongke.png");
 }
 
 .w-100 {
@@ -226,7 +222,7 @@ h1 {
 }
 
 .user-manage-wrapper {
-  background-image: url("../src/assets/Nen18.11.1.png");
+  background-image: url("../src/assets/nenquantri.png");
   /* background: red; */
   width: 100%;
   height: 100vh;
@@ -328,8 +324,10 @@ tfoot td {
   padding-top: 0;
 }
 .statistical .listCountUnit {
-  max-height: 63vh;
+  max-height: 50vh;
   overflow-y: auto;
+  background-color: #f4f7f8;
+  margin-top: 2.35vh;
 }
 
 .statistical p {
@@ -492,9 +490,8 @@ tfoot td {
 }
 
 .scanner {
-  width: 100%;
+  width: 95%;
 
-  height: 100%;
   object-fit: cover;
 }
 
@@ -511,4 +508,22 @@ tfoot td {
 
 .ant-select-selection-item {
   overflow: unset;
+}
+
+.main-wrapper-quay-so {
+  background-image: url("../src/assets/nenquayso.png");
+}
+
+.primary-button-main {
+  /* border-radius: 1vw; */
+  color: #000052;
+  /* background-color: orange; */
+  padding: 10px 20px;
+  /* outline: none;
+  border-color: red; */
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  font-weight: 550;
+  background-image: url("./assets/nut.png");
 }

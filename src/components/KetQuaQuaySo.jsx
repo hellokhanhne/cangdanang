@@ -5,7 +5,7 @@ const KetQuaQuaySo = ({ dsTrungGiai }) => {
     <div
       className="w-100 "
       style={{
-        height: "53.25vh",
+        height: "42.25vh  ",
         overflowY: "auto",
         marginTop: "3vh",
       }}

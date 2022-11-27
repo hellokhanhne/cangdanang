@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { collection, getDocs, onSnapshot, query } from "firebase/firestore";
 import moment from "moment";
-import titleImg from "./assets/TenCTr.2.png";
+// import titleImg from "./assets/TenCTr.2.png";
 import { useEffect, useState } from "react";
 import { db } from "./firebase";
 
@@ -103,7 +103,7 @@ function ListCheckIn() {
         style={{
           paddingLeft: "10vw",
           paddingRight: "10vw",
-          paddingTop: "18vh",
+          paddingTop: "31.5vh",
         }}
       >
         <div
@@ -112,13 +112,13 @@ function ListCheckIn() {
             marginBottom: "7.5vh",
           }}
         >
-          <img
+          {/* <img
             src={titleImg}
             alt=""
             style={{
               maxWidth: "45%",
             }}
-          />
+          /> */}
         </div>
         <div className="d-flex">
           <div
@@ -127,7 +127,12 @@ function ListCheckIn() {
               paddingRight: "20px",
             }}
           >
-            <div className="title-wrapper">
+            <div
+              className="title-wrapper "
+              style={{
+                marginBottom: 0,
+              }}
+            >
               {" "}
               <div
                 style={{
@@ -170,7 +175,7 @@ function ListCheckIn() {
             <div
               className="w-100 "
               style={{
-                maxHeight: "56.25vh",
+                maxHeight: "50.25vh",
                 overflowY: "auto",
                 marginTop: "3vh",
               }}
@@ -230,6 +235,9 @@ function ListCheckIn() {
                 <p
                   style={{
                     marginBottom: 5,
+                    background: "red",
+                    color: "white",
+                    padding: "7px 12px",
                   }}
                 >
                   Số lượng đại biểu đã tham gia :
@@ -237,13 +245,16 @@ function ListCheckIn() {
                     {total.totalJoin} / {total.total}
                   </b>
                 </p>
-                <hr />
+
                 <div className="listCountUnit">
                   {listCountUnit.map((l, i) => (
                     <p
                       key={i}
                       style={{
-                        marginBottom: 5,
+                        background: "#e8eeef",
+                        marginBottom: 3,
+                        padding: "10px 12px",
+                        textAlign: "center",
                       }}
                     >
                       {"Bàn số "} {l.key} :{" "}

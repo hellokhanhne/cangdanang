@@ -13,7 +13,9 @@ import { v4 as uuidv4 } from "uuid";
 import Scanner from "./components/scanner";
 import { db } from "./firebase";
 
-import headImage from "../src/assets/TenCTr.png";
+import chaomung from "./assets/checkin.png";
+
+import soban from "./assets/soban.png";
 
 function App() {
   const [userCurrent, setUserCurrent] = useState(null);
@@ -86,27 +88,17 @@ function App() {
   return (
     <div className={` main-wrapper position-relative`}>
       <div className="h-100 d-flex flex-column">
-        <div className="text-center flex-1">
-          <img
-            src={headImage}
-            style={{
-              width: "70%",
-              objectFit: "cover",
-              marginTop: "1vh",
-            }}
-            alt=""
-          />
-        </div>
         <div
           className="w-100  d-flex justify-content-center align-items-center"
           style={{
             marginBottom: "5.5vh",
+            marginTop: "28vh",
           }}
         >
           <div
             className="d-flex flex-column"
             style={{
-              width: "35%",
+              width: "40%",
             }}
           >
             <Scanner onScan={scan} />
@@ -115,13 +107,83 @@ function App() {
             className="d-flex align-items-center"
             style={{
               width: "40%",
-              maxHeight: "50vh",
+              maxHeight: "72vh",
               padding: "1vh 1vw",
               overflow: "auto",
               marginLeft: "5.5vw",
             }}
           >
-            <div>
+            <div className="d-flex flex-column align-items-center">
+              <h2
+                className="font-large text-center  text-blue"
+                style={{
+                  textTransform: "uppercase",
+                  marginBottom: "1.15vh",
+                  fontSize: "3.5vw",
+                  lineHeight: 1.2,
+                }}
+              >
+                {userCurrent?.nguoidaidien || "."}
+              </h2>
+              <h2
+                className="font-large text-center  text-blue"
+                style={{
+                  textTransform: "uppercase",
+                  marginBottom: "1.15vh",
+                  fontSize: "3.5vw",
+                  lineHeight: 1.2,
+                }}
+              >
+                {userCurrent?.tencongty || "."}
+              </h2>
+              <div
+                style={{
+                  maxWidth: "100%",
+                  marginTop: "1vh",
+                }}
+              >
+                <img
+                  src={chaomung}
+                  style={{
+                    width: "100%",
+                  }}
+                  alt=""
+                />
+              </div>
+
+              <div
+                className=""
+                style={{
+                  marginTop: "2vh",
+                }}
+              >
+                <div
+                  className="m-auto  "
+                  style={{
+                    maxWidth: "75%",
+                    position: "relative",
+                  }}
+                >
+                  <img className="w-100" src={soban} alt="" />
+                  <h1
+                    style={{
+                      position: "absolute",
+                      right: "3vw",
+                      bottom: 0,
+                      top: "40%",
+                      transform: "translateY(-50%)",
+                      marginBottom: 0,
+                      fontWeight: 900,
+                      fontSize: "3vw",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {userCurrent?.soban || "."}
+                  </h1>
+                </div>
+              </div>
+            </div>
+            {/* <div>
               <h2
                 className="font-large text-center border-text-white text-orange"
                 style={{
@@ -172,7 +234,7 @@ function App() {
               >
                 SỐ BÀN : {userCurrent?.soban || "- - - - - - - -"}
               </h2>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

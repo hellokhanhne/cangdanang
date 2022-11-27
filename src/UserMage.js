@@ -9,13 +9,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import titleImg from "./assets/TenCTr.1.png";
 import AdminWrappter from "./components/AdminWrappter";
 import CoCauGiaiThuongModal from "./components/CoCauGiaiThuongModal";
 import CreateUserModal from "./components/CreateUserModalx";
 import UpdateUserModal from "./components/UpdateUserModal";
 import { db } from "./firebase";
 import useDebounce from "./hooks/useDebounce";
+import searchIcon from "../src/assets/search-outline.svg";
 
 const UserMage = () => {
   const [users, setUsers] = useState([]);
@@ -91,20 +91,20 @@ const UserMage = () => {
         <div
           className="text-center"
           style={{
-            marginTop: "5vh",
+            marginTop: "22vh",
           }}
         >
-          <img
+          {/* <img
             style={{
               maxWidth: "35%",
             }}
             src={titleImg}
             alt=""
-          />
+          /> */}
         </div>
         <div
           style={{
-            textAlign: "right",
+            textAlign: "center",
             marginTop: "1.5rem",
           }}
         >
@@ -134,11 +134,14 @@ const UserMage = () => {
               marginBottom: "1vh",
             }}
           >
-            <h5 className="pe-4 mb-0 border-text-blue text-blue flex-1">
-              Tìm kiếm ( có dấu ){" "}
-            </h5>
+            {/* <div
+              style={{
+                maxWidth: "75%",
+              }}
+            > */}
             <input
               className="form-control form-control-sm"
+              placeholder="Tìm kiếm khách hàng ( có dấu )"
               type="text"
               style={{
                 maxWidth: "75%",
@@ -148,6 +151,7 @@ const UserMage = () => {
               onChange={(e) => setSearch(e.target.value)}
               id=""
             />
+            {/* </div> */}
           </div>
           <div
             className="d-flex align-items-center justify-content-center"
@@ -155,9 +159,6 @@ const UserMage = () => {
               marginBottom: "3vh",
             }}
           >
-            <h5 className="pe-4 mb-0 border-text-blue text-blue flex-1">
-              Chọn số bàn
-            </h5>
             <select
               className="form-select form-select-sm"
               value={unit}
@@ -168,7 +169,7 @@ const UserMage = () => {
                 setUnit(e.target.value);
               }}
             >
-              <option value="All">Tất cả các bàn</option>
+              <option value="All">Chọn số bàn</option>
               {tabs.map((t) => (
                 <option value={t} key={t}>
                   Bàn số {t}
@@ -178,7 +179,7 @@ const UserMage = () => {
           </div>
           <div
             style={{
-              maxHeight: "57.25vh",
+              maxHeight: "42.25vh",
               overflowY: "auto",
             }}
           >

@@ -4,6 +4,7 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
+  orderBy,
   query,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -15,7 +16,6 @@ import CreateUserModal from "./components/CreateUserModalx";
 import UpdateUserModal from "./components/UpdateUserModal";
 import { db } from "./firebase";
 import useDebounce from "./hooks/useDebounce";
-import searchIcon from "../src/assets/search-outline.svg";
 
 const UserMage = () => {
   const [users, setUsers] = useState([]);
@@ -43,7 +43,7 @@ const UserMage = () => {
 
   useEffect(() => {
     if (!unit) return;
-    const q = query(collection(db, "users"));
+    const q = query(collection(db, "users"), orderBy("qrcode"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let arr = [];
       querySnapshot.forEach((doc) => {

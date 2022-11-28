@@ -13,7 +13,7 @@ function ChaoMung() {
   console.log(listAttend);
 
   useEffect(() => {
-    if (count > 10) {
+    if (count > 5) {
       if (index === listAttend.length - 1) {
         setIndex(0);
         setUserCurrent(listAttend[index]);

@@ -14,7 +14,7 @@ import CongratulationOverlay from "./CongratulationOverlay";
 import OverlayV2 from "./Overlayv2";
 import OverlayWrapper from "./OverlayWrapper";
 import { v4 as uuidv4 } from "uuid";
-
+import Swal from "sweetalert2";
 import giaithuongL from "../assets/giaithuong.png";
 import giaithuongR from "../assets/giaithuong1.png";
 
@@ -66,7 +66,11 @@ const QuaySoTab = ({ dsTrungGiai }) => {
 
   const handleQuayGiai = (key, value) => {
     if (dataRadom.length < 1) {
-      return alert("Không còn số may mắn để tiếp tục random !");
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "The number of prizes or lucky numbers has been exhausted to conduct the bonus.",
+      });
     }
     setGiai(value.name);
     setIsLoadingRandom(true);

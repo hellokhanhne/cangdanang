@@ -67,8 +67,7 @@
         (o = i.playSound),
         e(this).append(
           '<canvas id="myCanvas" style="background-image:url(\'' +
-            s +
-            "images/ballMachineBackground.jpg'); background-position: center; background-size: contain;\"></canvas>"
+            "./balls/ball.png'); background-position: center; background-size: cover;\"></canvas>"
         ),
         e(this).append("</br>"),
         e(this).append(

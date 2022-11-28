@@ -1,6 +1,10 @@
 import React from "react";
 
 const KetQuaQuaySo = ({ dsTrungGiai }) => {
+  let dsTrungGiaiRender = dsTrungGiai;
+  console.log(dsTrungGiaiRender);
+  dsTrungGiaiRender.sort((a, b) => a.quanlity - b.quanlity);
+
   return (
     <div
       className="w-100 "
@@ -28,7 +32,7 @@ const KetQuaQuaySo = ({ dsTrungGiai }) => {
         </thead>
 
         <tbody>
-          {dsTrungGiai.map((l, i) => (
+          {dsTrungGiaiRender.map((l, i) => (
             <tr key={i}>
               <td>{i + 1}</td>
               <td>{l.nguoidaidien}</td>

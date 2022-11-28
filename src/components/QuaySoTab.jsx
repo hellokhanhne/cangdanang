@@ -80,12 +80,14 @@ const QuaySoTab = ({ dsTrungGiai }) => {
       setWiner((w) => ({
         ...winUser,
         tengiaithuong: value?.name,
+        quanlity: value?.quanlity,
       }));
       const prizeRef = doc(db, "dstrunggiai", uuidv4());
       setDoc(prizeRef, {
         ...winUser,
         tengiaithuong: value?.name,
         idGiaiThuong: key,
+        quanlity: value?.quanlity,
       });
     }, 16000);
   };
@@ -327,6 +329,7 @@ const QuaySoTab = ({ dsTrungGiai }) => {
                 //   </div>
                 // </div>
                 <div
+                  key={index}
                   style={{
                     width: "48%",
                     marginBottom: "2vh",

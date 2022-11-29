@@ -33,7 +33,7 @@ const ChaoMungComponent = ({ userCurrent }) => {
         style={{
           textTransform: "uppercase",
           marginBottom: "1.15vh",
-          fontSize: "3.5vw",
+          fontSize: "2.15vw",
           lineHeight: 1.2,
         }}
       >

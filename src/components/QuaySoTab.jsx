@@ -190,6 +190,7 @@ const QuaySoTab = ({ dsTrungGiai }) => {
                     borderRadius: 10,
                     padding: "1.5vw 2.5vw",
                     position: "relative",
+                    maxWidth: "65vw",
                   }}
                 >
                   <div
@@ -251,12 +252,21 @@ const QuaySoTab = ({ dsTrungGiai }) => {
                     style={{
                       textTransform: "uppercase",
                       marginBottom: "1.15vh",
-                      fontSize: "2.25vw",
+                      fontSize: "1.55vw",
                       lineHeight: 1.35,
                       fontWeight: 900,
+                      // display : "flex",
+                      // justifyContent : "center"
                     }}
                   >
-                    <span className="text-red cyen">
+                    <span
+                      className="text-red cyen"
+                      style={
+                        {
+                          // maxWidth : "70%"
+                        }
+                      }
+                    >
                       {winer?.tencongty || "----------------"}
                     </span>
                   </h2>

@@ -25,6 +25,7 @@ const CreateUserModal = ({ modalIsOpen, setIsOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(form);
     const usersRef = doc(db, "users", uuidv4());
     if (!form.nguoidaidien || form.nguoidaidien === "") {
       form.nguoidaidien = "Người đại diện";

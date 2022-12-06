@@ -24,6 +24,7 @@ const SubUpdateUserModal = ({ modalIsOpen, setIsOpen, initForm }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     for (let [key, val] of Object.entries(form)) {
       if (!val || val === "") {
         delete form[key];

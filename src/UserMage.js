@@ -202,7 +202,7 @@ const UserMage = () => {
                     <td>{i + 1}</td>
                     <td>{l.nguoidaidien}</td>
                     <td>{l.soban}</td>
-                    <td>{l.somayman}</td>
+                    <td>{l.somayman || ""}</td>
                     <td>{l.tencongty} </td>
                     <td>{l.qrcode} </td>
                     <td>

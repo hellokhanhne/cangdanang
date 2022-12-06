@@ -24,7 +24,7 @@ const UpdateUserModal = ({ modalIsOpen, setIsOpen, initForm }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    // console.log(form);
     for (let [key, val] of Object.entries(form)) {
       if (!val || val === "") {
         delete form[key];
@@ -33,7 +33,7 @@ const UpdateUserModal = ({ modalIsOpen, setIsOpen, initForm }) => {
     const usersRef = doc(db, "users", form?.id);
 
     setDoc(usersRef, form, {
-      merge: true,
+      // merge: true,
     });
     toast.success("Cập nhật thành công !", {
       position: "top-right",

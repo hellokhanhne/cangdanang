@@ -40,8 +40,8 @@ function QuaySo() {
       <div
         className="h-100"
         style={{
-          paddingLeft: "10vw",
-          paddingRight: "10vw",
+          paddingLeft: "2vw",
+          paddingRight: "2vw",
           paddingTop: "39vh",
         }}
       >

@@ -32,6 +32,10 @@ const QuaySoTab = ({ dsTrungGiai }) => {
     ([_k1, v1], [_k2, v2]) => Number(v2.quanlity) - Number(v1.quanlity)
   );
 
+  const listPrizeExeptDB = listPrizeArray.filter(([key, value]) => {
+    return value.name.toUpperCase() !== "GIẢI ĐẶC BIỆT".toUpperCase();
+  });
+
   useEffect(() => {
     const unsub = onSnapshot(
       doc(db, "dsgiaithuong", "cocaugiaithuong"),
@@ -305,7 +309,12 @@ const QuaySoTab = ({ dsTrungGiai }) => {
       )}
       <div className="h-100 d-flex justify-content-center ">
         {listPrizeArray.length % 2 === 0 && (
-          <div className="random">
+          <div
+            className="random"
+            style={{
+              padding: "0 13vw",
+            }}
+          >
             {listPrizeArray.map(([key, value], index) => {
               return (
                 <div
@@ -362,41 +371,109 @@ const QuaySoTab = ({ dsTrungGiai }) => {
           </div>
         )}
         {listPrizeArray.length % 2 !== 0 && (
-          <div className="random">
-            {listPrizeArray.map(([key, value], index) => {
-              if (index === 3) {
+          <div
+            className="random"
+            style={{
+              padding: 0,
+              marginTop: "3vh",
+            }}
+          >
+            <div
+              style={{
+                width: "31%",
+                marginBottom: "2vh",
+                position: "relative",
+              }}
+            >
+              {listPrizeExeptDB.slice(0, 3).map(([key, value], index) => {
                 return (
-                  <>
+                  <div
+                    key={index}
+                    style={{
+                      // width: "31%",
+                      marginBottom: "2vh",
+                      position: "relative",
+                    }}
+                    className="item-quay-so"
+                  >
+                    <img className="w-100" src={giaithuongL} alt="" />
                     <div
-                      key={index}
                       style={{
-                        width: "31%",
-                        marginBottom: "2vh",
-                        position: "relative",
+                        position: "absolute",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+
+                        textAlign: "center",
+                        width: "80%",
                       }}
-                      className="item-quay-so"
+                    >
+                      <div
+                        className="big"
+                        style={{
+                          fontSize: "1.6vw",
+                        }}
+                      >
+                        {value.name}
+                      </div>
+                      <div className="small">
+                        Số lượng giải còn lại :{" "}
+                        {Number(value.quanlity) - (giaiConLai[value.name] || 0)}
+                      </div>
+                    </div>
+                    <div
+                      onClick={() => handleQuayGiai(key, value)}
+                      style={{
+                        position: "absolute",
+                        right: 0,
+                        top: 0,
+                        width: "20%",
+                        height: "100%",
+                        cursor: "pointer",
+                        pointerEvents:
+                          Number(value.quanlity) -
+                            (giaiConLai[value.name] || 0) >
+                          0
+                            ? "auto"
+                            : "none",
+                      }}
                     ></div>
+                  </div>
+                );
+              })}
+            </div>
+            <div
+              style={{
+                width: "31%",
+                marginBottom: "2vh",
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+              }}
+              className="item-quay-so"
+            >
+              {listPrizeArray
+                .filter(
+                  ([key, value]) =>
+                    value.name.toUpperCase() === "GIẢI ĐẶC BIỆT".toUpperCase()
+                )
+                .map(([key, value], index) => {
+                  return (
                     <div
                       key={index}
                       style={{
-                        width: "31%",
+                        // width: "31%",
                         marginBottom: "2vh",
                         position: "relative",
                       }}
                       className="item-quay-so"
                     >
-                      <img
-                        className="w-100"
-                        src={index < 3 ? giaithuongL : giaithuongR}
-                        alt=""
-                      />
+                      <img className="w-100" src={giaithuongL} alt="" />
                       <div
                         style={{
                           position: "absolute",
                           top: "50%",
                           transform: "translateY(-50%)",
-                          left: index % 2 === 0 ? 0 : "none",
-                          right: index % 2 !== 0 ? 0 : "none",
+
                           textAlign: "center",
                           width: "80%",
                         }}
@@ -404,7 +481,7 @@ const QuaySoTab = ({ dsTrungGiai }) => {
                         <div
                           className="big"
                           style={{
-                            fontSize: "1.8vw",
+                            fontSize: "1.6vw",
                           }}
                         >
                           {value.name}
@@ -419,8 +496,7 @@ const QuaySoTab = ({ dsTrungGiai }) => {
                         onClick={() => handleQuayGiai(key, value)}
                         style={{
                           position: "absolute",
-                          left: index % 2 !== 0 ? 0 : "none",
-                          right: index % 2 === 0 ? 0 : "none",
+                          right: 0,
                           top: 0,
                           width: "20%",
                           height: "100%",
@@ -434,77 +510,73 @@ const QuaySoTab = ({ dsTrungGiai }) => {
                         }}
                       ></div>
                     </div>
-                    <div
-                      key={index}
-                      style={{
-                        width: "31%",
-                        marginBottom: "2vh",
-                        position: "relative",
-                      }}
-                      className="item-quay-so"
-                    ></div>
-                  </>
-                );
-              }
-              return (
-                <div
-                  key={index}
-                  style={{
-                    width: "31%",
-                    marginBottom: "2vh",
-                    position: "relative",
-                  }}
-                  className="item-quay-so"
-                >
-                  <img
-                    className="w-100"
-                    src={index < 3 ? giaithuongL : giaithuongR}
-                    alt=""
-                  />
+                  );
+                })}
+            </div>
+            <div
+              style={{
+                width: "31%",
+                marginBottom: "2vh",
+                position: "relative",
+              }}
+              className="item-quay-so"
+            >
+              {listPrizeExeptDB.slice(-3).map(([key, value], index) => {
+                return (
                   <div
+                    key={index}
                     style={{
-                      position: "absolute",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      left: index % 2 === 0 ? 0 : "none",
-                      right: index % 2 !== 0 ? 0 : "none",
-                      textAlign: "center",
-                      width: "80%",
+                      // width: "31%",
+                      marginBottom: "2vh",
+                      position: "relative",
                     }}
+                    className="item-quay-so"
                   >
+                    <img className="w-100" src={giaithuongR} alt="" />
                     <div
-                      className="big"
                       style={{
-                        fontSize: "1.8vw",
+                        position: "absolute",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        right: 0,
+                        textAlign: "center",
+                        width: "80%",
                       }}
                     >
-                      {value.name}
+                      <div
+                        className="big"
+                        style={{
+                          fontSize: "1.6vw",
+                        }}
+                      >
+                        {value.name}
+                      </div>
+                      <div className="small">
+                        Số lượng giải còn lại :{" "}
+                        {Number(value.quanlity) - (giaiConLai[value.name] || 0)}
+                      </div>
                     </div>
-                    <div className="small">
-                      Số lượng giải còn lại :{" "}
-                      {Number(value.quanlity) - (giaiConLai[value.name] || 0)}
-                    </div>
+                    <div
+                      onClick={() => handleQuayGiai(key, value)}
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        top: 0,
+                        width: "20%",
+                        height: "100%",
+                        cursor: "pointer",
+                        pointerEvents:
+                          Number(value.quanlity) -
+                            (giaiConLai[value.name] || 0) >
+                          0
+                            ? "auto"
+                            : "none",
+                      }}
+                    ></div>
                   </div>
-                  <div
-                    onClick={() => handleQuayGiai(key, value)}
-                    style={{
-                      position: "absolute",
-                      left: index % 2 !== 0 ? 0 : "none",
-                      right: index % 2 === 0 ? 0 : "none",
-                      top: 0,
-                      width: "20%",
-                      height: "100%",
-                      cursor: "pointer",
-                      pointerEvents:
-                        Number(value.quanlity) - (giaiConLai[value.name] || 0) >
-                        0
-                          ? "auto"
-                          : "none",
-                    }}
-                  ></div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

@@ -11,6 +11,7 @@ const initState = {
   soban: "",
   somayman: "",
   tencongty: "",
+  chucvu: "",
 };
 
 const CreateUserModal = ({ modalIsOpen, setIsOpen }) => {
@@ -94,6 +95,15 @@ const CreateUserModal = ({ modalIsOpen, setIsOpen }) => {
             name="tencongty"
             required
             value={form?.tencongty}
+          />
+
+          <p className="mb-0 mt-2">Chức vụ</p>
+          <input
+            className="form-control"
+            type="text"
+            onChange={handleChange}
+            name="chucvu"
+            value={form?.chucvu}
           />
 
           <p className="mb-0 mt-2">QR code </p>

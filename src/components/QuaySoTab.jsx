@@ -7,16 +7,16 @@ import {
   setDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { v4 as uuidv4 } from "uuid";
 import closeImage from "../assets/close.png";
 import congra from "../assets/congra.gif";
+import giaithuongL from "../assets/giaithuong.png";
+import giaithuongR from "../assets/giaithuong1.png";
 import { db } from "../firebase";
 import CongratulationOverlay from "./CongratulationOverlay";
 import OverlayV2 from "./Overlayv2";
 import OverlayWrapper from "./OverlayWrapper";
-import { v4 as uuidv4 } from "uuid";
-import Swal from "sweetalert2";
-import giaithuongL from "../assets/giaithuong.png";
-import giaithuongR from "../assets/giaithuong1.png";
 
 import "./styles/quayso.css";
 
@@ -27,6 +27,8 @@ const QuaySoTab = ({ dsTrungGiai }) => {
   const [winer, setWiner] = useState(null);
   const [isLoadingRandom, setIsLoadingRandom] = useState(false);
   const [giai, setGiai] = useState("");
+
+  console.log("data random ", dataRadom);
 
   const listPrizeArray = Object.entries(listPrize).sort(
     ([_k1, v1], [_k2, v2]) => Number(v2.quanlity) - Number(v1.quanlity)
@@ -53,13 +55,23 @@ const QuaySoTab = ({ dsTrungGiai }) => {
 
     const unsubscribe = onSnapshot(q, async (querySnapshot) => {
       const arr = querySnapshot.docs.map((d) => d.data());
+      // for (let d of querySnapshot.docs) {
+      //   await deleteDoc(doc(db, "checkIns_test_5", d.id));
+      // }
       let setUnitArr = Array.from(new Set(arr.map((e) => e.qrcode))).map(
         (code) => arr.find((u) => u.qrcode === code)
       );
       let dsTrungGiaiSnap = await getDocs(collection(db, "dstrunggiai"));
+
       setUnitArr = setUnitArr.filter((u) => {
         return (
-          !dsTrungGiaiSnap.docs.find((d) => d.data().qrcode === u.qrcode) &&
+          !dsTrungGiaiSnap.docs.find((d) => {
+            return (
+              d.data().qrcode === u.qrcode ||
+              d.data().tencongty.toUpperCase().trim() ===
+                u.tencongty.toUpperCase().trim()
+            );
+          }) &&
           u.somayman &&
           u.somayman !== ""
         );
@@ -88,7 +100,15 @@ const QuaySoTab = ({ dsTrungGiai }) => {
     setTimeout(async () => {
       setIsLoadingRandom(false);
       document.getElementById("lotteryMachine").style.display = "none";
-      setDataRandom(dataRadom.filter((d) => d.qrcode !== winUser.qrcode));
+      setDataRandom(
+        dataRadom.filter((d) => {
+          return (
+            d.qrcode !== winUser.qrcode &&
+            d.tencongty.toUpperCase().trim() !==
+              winUser.tencongty.toUpperCase().trim()
+          );
+        })
+      );
       setWiner((w) => ({
         ...winUser,
         tengiaithuong: value?.name,

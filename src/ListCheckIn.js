@@ -191,6 +191,7 @@ function ListCheckIn() {
                   <tr>
                     <th scope="col">STT</th>
                     <th scope="col">Người đại diện</th>
+                    <th scope="col">Chức vụ</th>
                     <th scope="col">Công ty</th>
                     <th scope="col">Đã check in vào thời gian</th>
                   </tr>
@@ -201,6 +202,7 @@ function ListCheckIn() {
                     <tr key={i}>
                       <td>{i + 1}</td>
                       <td>{l.nguoidaidien}</td>
+                      <td>{l.chucvu}</td>
                       <td>{l.tencongty}</td>
 
                       <td>

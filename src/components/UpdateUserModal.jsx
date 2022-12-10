@@ -10,6 +10,7 @@ const initState = {
   soban: "",
   somayman: "",
   tencongty: "",
+  chucvu: "",
 };
 
 const UpdateUserModal = ({ modalIsOpen, setIsOpen, initForm }) => {
@@ -94,6 +95,15 @@ const UpdateUserModal = ({ modalIsOpen, setIsOpen, initForm }) => {
             name="somayman"
             value={form?.somayman}
             onChange={handleChange}
+          />
+
+          <p className="mb-0 mt-2">Chức vụ</p>
+          <input
+            className="form-control"
+            type="text"
+            onChange={handleChange}
+            name="chucvu"
+            value={form?.chucvu}
           />
 
           <p className="mb-0 mt-2">Tên công ty</p>

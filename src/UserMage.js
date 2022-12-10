@@ -190,6 +190,7 @@ const UserMage = () => {
                   <th scope="col">Người đại diện</th>
                   <th scope="col">Số bàn</th>
                   <th scope="col">Số may mắn</th>
+                  <th scope="col">Chức vụ</th>
                   <th scope="col">Tên công ty</th>
                   <th scope="col">Qr code </th>
                   <th scope="col">Hành động</th>
@@ -203,6 +204,7 @@ const UserMage = () => {
                     <td>{l.nguoidaidien}</td>
                     <td>{l.soban}</td>
                     <td>{l.somayman || ""}</td>
+                    <td>{l?.chucvu} </td>
                     <td>{l.tencongty} </td>
                     <td>{l.qrcode} </td>
                     <td>

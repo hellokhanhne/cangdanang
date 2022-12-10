@@ -1,11 +1,4 @@
-import {
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import ketquaquayso from "./assets/ketquaquayso.png";
 import quayso from "./assets/quayso.png";

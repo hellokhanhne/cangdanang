@@ -9,8 +9,8 @@ function ChaoMung() {
   const [index, setIndex] = useState(0);
   const [count, setCount] = useState(1);
 
-  console.log(userCurrent);
-  console.log(listAttend);
+  // console.log(userCurrent);
+  // console.log(listAttend);
 
   useEffect(() => {
     if (count > 5) {

@@ -37,7 +37,7 @@ const ChaoMungComponent = ({ userCurrent }) => {
           lineHeight: 1.2,
         }}
       >
-        {userCurrent?.tencongty || "."}
+        {userCurrent?.chucvu} {userCurrent?.tencongty || "."}
       </h2>
       <div
         style={{

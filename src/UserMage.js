@@ -192,6 +192,7 @@ const UserMage = () => {
                   <th scope="col">Số may mắn</th>
                   <th scope="col">Chức vụ</th>
                   <th scope="col">Tên công ty</th>
+                  <th scope="col">Số khách đi kèm</th>
                   <th scope="col">Qr code </th>
                   <th scope="col">Hành động</th>
                 </tr>
@@ -206,11 +207,14 @@ const UserMage = () => {
                     <td>{l.somayman || ""}</td>
                     <td>{l?.chucvu} </td>
                     <td>{l.tencongty} </td>
+                    <td>
+                      {Number(l.sokhachdikem) === 0 ? "" : l.sokhachdikem}{" "}
+                    </td>
                     <td>{l.qrcode} </td>
                     <td>
                       <button
                         onClick={() => handleDelete(l.id)}
-                        className="btn btn-danger me-3 text-white"
+                        className="btn btn-danger me-2 text-white"
                       >
                         Xóa
                       </button>

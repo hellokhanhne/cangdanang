@@ -1,5 +1,12 @@
 import { Button } from "antd";
-import { collection, getDocs, onSnapshot, query } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 import moment from "moment";
 // import titleImg from "./assets/TenCTr.2.png";
 import { useEffect, useState } from "react";
@@ -21,7 +28,9 @@ function ListCheckIn() {
 
     const unsubscribe = onSnapshot(q, async (querySnapshot) => {
       const arr = querySnapshot.docs.map((d) => d.data());
-
+      // for (let d of querySnapshot.docs) {
+      //   await deleteDoc(doc(db, "checkIns_test_5", d.id));
+      // }
       const querySnapshot_2 = await getDocs(collection(db, "users"));
 
       const banUnit = Array.from(
@@ -57,14 +66,38 @@ function ListCheckIn() {
       );
 
       setTotal({
-        totalJoin: setUnitIds.size,
-        total: querySnapshot_2.size,
+        totalJoin: setUnitArrayUser.reduce((prev, current) => {
+          console.log(current);
+          if (current.sokhachdikem && !isNaN(current.sokhachdikem)) {
+            return prev + 1 + Number(current.sokhachdikem);
+          }
+          return prev + 1;
+        }, 0),
+        total: querySnapshot_2.docs.reduce((prev, current) => {
+          if (
+            current.data().sokhachdikem &&
+            !isNaN(current.data().sokhachdikem)
+          ) {
+            return prev + 1 + Number(current.data().sokhachdikem);
+          }
+          return prev + 1;
+        }, 0),
       });
 
       const obj = setUnitArrayUser.reduce((prev, current) => {
         return prev[current.soban]
-          ? { ...prev, [current.soban]: prev[current.soban] + 1 }
-          : { ...prev, [current.soban]: 1 };
+          ? {
+              ...prev,
+              [current.soban]: current.sokhachdikem
+                ? prev[current.soban] + 1 + Number(current.sokhachdikem)
+                : prev[current.soban] + 1,
+            }
+          : {
+              ...prev,
+              [current.soban]: current.sokhachdikem
+                ? Number(current.sokhachdikem) + 1
+                : 1,
+            };
       }, {});
 
       const newListCountUnit = [];
@@ -76,7 +109,9 @@ function ListCheckIn() {
             totalItemsUnit: querySnapshot_2.docs
               .map((d) => d.data())
               .reduce((t, c) => {
-                return c.soban === key ? t + 1 : t;
+                return c.soban === key
+                  ? t + 1 + (Number(c.sokhachdikem) || 0)
+                  : t;
               }, 0),
           },
         });
@@ -89,7 +124,7 @@ function ListCheckIn() {
     return () => {
       unsubscribe();
     };
-  }, [unit, tabs, isJoin]);
+  }, [isJoin, unit]);
 
   return (
     <div
@@ -193,6 +228,7 @@ function ListCheckIn() {
                     <th scope="col">Người đại diện</th>
                     <th scope="col">Chức vụ</th>
                     <th scope="col">Công ty</th>
+                    <th scope="col">Số khách đi kèm</th>
                     <th scope="col">Đã check in vào thời gian</th>
                   </tr>
                 </thead>
@@ -204,7 +240,9 @@ function ListCheckIn() {
                       <td>{l.nguoidaidien}</td>
                       <td>{l.chucvu}</td>
                       <td>{l.tencongty}</td>
-
+                      <td>
+                        {Number(l.sokhachdikem) === 0 ? "" : l.sokhachdikem}{" "}
+                      </td>
                       <td>
                         {l.checkIn
                           ? moment(l.checkIn).format("DD-MM-YYYY HH:mm")

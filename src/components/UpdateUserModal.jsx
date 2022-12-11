@@ -11,6 +11,7 @@ const initState = {
   somayman: "",
   tencongty: "",
   chucvu: "",
+  sokhachdikem: 0,
 };
 
 const UpdateUserModal = ({ modalIsOpen, setIsOpen, initForm }) => {
@@ -114,6 +115,15 @@ const UpdateUserModal = ({ modalIsOpen, setIsOpen, initForm }) => {
             name="tencongty"
             required
             value={form?.tencongty}
+          />
+
+          <p className="mb-0 mt-2">Số khách đi kèm</p>
+          <input
+            className="form-control"
+            type="number"
+            onChange={handleChange}
+            name="sokhachdikem"
+            value={form?.sokhachdikem}
           />
 
           <p className="mb-0 mt-2">QR code </p>

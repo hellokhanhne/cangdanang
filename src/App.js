@@ -16,6 +16,7 @@ import { db } from "./firebase";
 import chaomung from "./assets/checkin.png";
 
 import soban from "./assets/soban.png";
+import Swal from "sweetalert2";
 
 function App() {
   const [userCurrent, setUserCurrent] = useState(null);
@@ -26,6 +27,16 @@ function App() {
     async (value) => {
       console.log(value === prev.current);
       if (value === prev.current) {
+        try {
+          Swal.fire({
+            icon: "info",
+            title: `Bạn đã checkIn vào lúc ${moment(userCurrent.checkIn)
+              .format("DD-MM-YYYY HH:MM:SS")
+              .toString()}`,
+            timer: 5000,
+          });
+        } catch (error) {}
+
         return;
       }
       prev.current = value;
@@ -45,12 +56,16 @@ function App() {
           where("qrcode", "==", _doc.data().qrcode)
         );
         let checkExist = false;
+        let snapCheckTime;
         for (let snap of (await getDocs(q2)).docs) {
           if (
             dateString ===
             moment(snap.data().checkIn).format("DD-MM-YYYY").toString()
           ) {
             checkExist = true;
+            snapCheckTime = moment(snap.data().checkIn)
+              .format("DD-MM-YYYY HH:MM:SS")
+              .toString();
           }
         }
         if (!checkExist) {
@@ -58,10 +73,16 @@ function App() {
             ..._doc.data(),
             checkIn: date,
           });
+        } else {
+          Swal.fire({
+            icon: "info",
+            title: `Bạn đã checkIn vào lúc ${snapCheckTime}`,
+            timer: 5000,
+          });
         }
       });
     },
-    [setUserCurrent]
+    [userCurrent]
   );
 
   useEffect(() => {

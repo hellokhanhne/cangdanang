@@ -29,7 +29,7 @@ function App() {
       if (value === prev.current) {
         try {
           Swal.fire({
-            icon: "info",
+            icon: "success",
             title: `Bạn đã checkIn vào lúc ${moment(userCurrent.checkIn)
               .format("DD-MM-YYYY HH:MM:SS")
               .toString()}`,
@@ -75,7 +75,7 @@ function App() {
           });
         } else {
           Swal.fire({
-            icon: "info",
+            icon: "success",
             title: `Bạn đã checkIn vào lúc ${snapCheckTime}`,
             timer: 5000,
           });

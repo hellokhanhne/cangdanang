@@ -67,9 +67,10 @@ const QuaySoTab = ({ dsTrungGiai }) => {
         return (
           !dsTrungGiaiSnap.docs.find((d) => {
             return (
-              d.data().qrcode === u.qrcode ||
-              d.data().tencongty.toUpperCase().trim() ===
-                u.tencongty.toUpperCase().trim()
+              d.data().qrcode === u.qrcode
+              // ||
+              // d.data().tencongty.toUpperCase().trim() ===
+              //   u.tencongty.toUpperCase().trim()
             );
           }) &&
           u.somayman &&
@@ -103,9 +104,10 @@ const QuaySoTab = ({ dsTrungGiai }) => {
       setDataRandom(
         dataRadom.filter((d) => {
           return (
-            d.qrcode !== winUser.qrcode &&
-            d.tencongty.toUpperCase().trim() !==
-              winUser.tencongty.toUpperCase().trim()
+            d.qrcode !== winUser.qrcode
+            // &&
+            // d.tencongty.toUpperCase().trim() !==
+            //   winUser.tencongty.toUpperCase().trim()
           );
         })
       );

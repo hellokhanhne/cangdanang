@@ -22,72 +22,69 @@ function App() {
 
   const prev = useRef("");
 
-  const scan = useCallback(
-    async (value) => {
-      console.log(value === prev.current);
-      if (value === prev.current) {
-        try {
-          // getDoc(doc(db, "checkIns_test_5", prev.current)).then((data) => {
-          //   if (data.exists()) {
-          //     Swal.fire({
-          //       icon: "success",
-          //       title: `Bạn đã checkIn vào lúc ${moment(data.data().checkIn)
-          //         .format("DD-MM-YYYY HH:MM:SS")
-          //         .toString()}`,
-          //       timer: 5000,
-          //     });
-          //   }
-          // });
-        } catch (error) {}
+  const scan = useCallback(async (value) => {
+    console.log(value === prev.current);
+    if (value === prev.current) {
+      try {
+        // getDoc(doc(db, "checkIns_test_5", prev.current)).then((data) => {
+        //   if (data.exists()) {
+        //     Swal.fire({
+        //       icon: "success",
+        //       title: `Bạn đã checkIn vào lúc ${moment(data.data().checkIn)
+        //         .format("DD-MM-YYYY HH:MM:SS")
+        //         .toString()}`,
+        //       timer: 5000,
+        //     });
+        //   }
+        // });
+      } catch (error) {}
 
-        return;
-      } else {
-        prev.current = value;
-      }
+      return;
+    } else {
+      prev.current = value;
+    }
 
-      const q = query(
-        collection(db, "users"),
-        where("qrcode", "==", value || "")
+    const q = query(
+      collection(db, "users"),
+      where("qrcode", "==", value || "")
+    );
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach(async (_doc) => {
+      const date = moment().valueOf();
+      const dateString = moment(date).format("DD-MM-YYYY").toString();
+      setUserCurrent({ ..._doc.data(), checkIn: date });
+      const q2 = query(
+        collection(db, "checkIns_test_5"),
+        where("qrcode", "==", _doc.data().qrcode)
       );
-
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach(async (_doc) => {
-        const date = moment().valueOf();
-        const dateString = moment(date).format("DD-MM-YYYY").toString();
-        setUserCurrent({ ..._doc.data(), checkIn: date });
-        const q2 = query(
-          collection(db, "checkIns_test_5"),
-          where("qrcode", "==", _doc.data().qrcode)
-        );
-        let checkExist = false;
-        // let snapCheckTime;
-        for (let snap of (await getDocs(q2)).docs) {
-          if (
-            dateString ===
-            moment(snap.data().checkIn).format("DD-MM-YYYY").toString()
-          ) {
-            checkExist = true;
-            // snapCheckTime = moment(snap.data().checkIn)
-            //   .format("DD-MM-YYYY HH:MM:SS")
-            //   .toString();
-          }
+      let checkExist = false;
+      // let snapCheckTime;
+      for (let snap of (await getDocs(q2)).docs) {
+        if (
+          dateString ===
+          moment(snap.data().checkIn).format("DD-MM-YYYY").toString()
+        ) {
+          checkExist = true;
+          // snapCheckTime = moment(snap.data().checkIn)
+          //   .format("DD-MM-YYYY HH:MM:SS")
+          //   .toString();
         }
-        if (!checkExist) {
-          await setDoc(doc(db, "checkIns_test_5", uuidv4()), {
-            ..._doc.data(),
-            checkIn: date,
-          });
-        } else {
-          // Swal.fire({
-          //   icon: "success",
-          //   title: `Bạn đã checkIn vào lúc ${snapCheckTime}`,
-          //   timer: 5000,
-          // });
-        }
-      });
-    },
-    [userCurrent]
-  );
+      }
+      if (!checkExist) {
+        await setDoc(doc(db, "checkIns_test_5", uuidv4()), {
+          ..._doc.data(),
+          checkIn: date,
+        });
+      } else {
+        // Swal.fire({
+        //   icon: "success",
+        //   title: `Bạn đã checkIn vào lúc ${snapCheckTime}`,
+        //   timer: 5000,
+        // });
+      }
+    });
+  }, []);
 
   useEffect(() => {}, []);
 

@@ -1,7 +1,6 @@
 import {
   collection,
   doc,
-  getDoc,
   getDocs,
   query,
   setDoc,
@@ -17,7 +16,6 @@ import { db } from "./firebase";
 import chaomung from "./assets/checkin.png";
 
 import soban from "./assets/soban.png";
-import Swal from "sweetalert2";
 
 function App() {
   const [userCurrent, setUserCurrent] = useState(null);
@@ -62,16 +60,16 @@ function App() {
           where("qrcode", "==", _doc.data().qrcode)
         );
         let checkExist = false;
-        let snapCheckTime;
+        // let snapCheckTime;
         for (let snap of (await getDocs(q2)).docs) {
           if (
             dateString ===
             moment(snap.data().checkIn).format("DD-MM-YYYY").toString()
           ) {
             checkExist = true;
-            snapCheckTime = moment(snap.data().checkIn)
-              .format("DD-MM-YYYY HH:MM:SS")
-              .toString();
+            // snapCheckTime = moment(snap.data().checkIn)
+            //   .format("DD-MM-YYYY HH:MM:SS")
+            //   .toString();
           }
         }
         if (!checkExist) {
@@ -80,11 +78,11 @@ function App() {
             checkIn: date,
           });
         } else {
-          Swal.fire({
-            icon: "success",
-            title: `Bạn đã checkIn vào lúc ${snapCheckTime}`,
-            timer: 5000,
-          });
+          // Swal.fire({
+          //   icon: "success",
+          //   title: `Bạn đã checkIn vào lúc ${snapCheckTime}`,
+          //   timer: 5000,
+          // });
         }
       });
     },

@@ -1,6 +1,7 @@
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   query,
   setDoc,
@@ -28,12 +29,16 @@ function App() {
       console.log(value === prev.current);
       if (value === prev.current) {
         try {
-          // Swal.fire({
-          //   icon: "success",
-          //   title: `Bạn đã checkIn vào lúc ${moment(userCurrent.checkIn)
-          //     .format("DD-MM-YYYY HH:MM:SS")
-          //     .toString()}`,
-          //   timer: 5000,
+          // getDoc(doc(db, "checkIns_test_5", prev.current)).then((data) => {
+          //   if (data.exists()) {
+          //     Swal.fire({
+          //       icon: "success",
+          //       title: `Bạn đã checkIn vào lúc ${moment(data.data().checkIn)
+          //         .format("DD-MM-YYYY HH:MM:SS")
+          //         .toString()}`,
+          //       timer: 5000,
+          //     });
+          //   }
           // });
         } catch (error) {}
 

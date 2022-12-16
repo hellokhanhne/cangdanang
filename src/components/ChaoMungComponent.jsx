@@ -22,7 +22,7 @@ const ChaoMungComponent = ({ userCurrent }) => {
         style={{
           textTransform: "uppercase",
           marginBottom: "1.15vh",
-          fontSize: "3.5vw",
+          fontSize: "2.5vw",
           lineHeight: 1.2,
         }}
       >
@@ -33,7 +33,7 @@ const ChaoMungComponent = ({ userCurrent }) => {
         style={{
           textTransform: "uppercase",
           marginBottom: "1.15vh",
-          fontSize: "2.15vw",
+          fontSize: "1.75vw",
           lineHeight: 1.2,
         }}
       >
@@ -63,7 +63,7 @@ const ChaoMungComponent = ({ userCurrent }) => {
         <div
           className="m-auto  "
           style={{
-            maxWidth: "45%",
+            maxWidth: "35%",
             position: "relative",
           }}
         >

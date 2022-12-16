@@ -20,11 +20,13 @@ import useDebounce from "./hooks/useDebounce";
 const UserMage = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
+  const [searchCongTy, setSearchCongTy] = useState("");
   const [selectUser, setSelectedUser] = useState(null);
   const [showModalCreate, setShowModalCreate] = useState(false);
   const [showCoCauModal, setCoCauModal] = useState(false);
   const [tabs, setTabs] = useState([]);
-  const debouncedValue = useDebounce(search, 500);
+  const debouncedValue = useDebounce(search, 600);
+  const debouncedTenCongTy = useDebounce(searchCongTy, 600);
   const [unit, setUnit] = useState("All");
   const [loading, setLoading] = useState(true);
 
@@ -60,14 +62,17 @@ const UserMage = () => {
         arr.filter(
           (u) =>
             (unit === "All" ? true : u.soban === unit) &&
-            u.nguoidaidien.toUpperCase().includes(debouncedValue.toUpperCase())
+            u.nguoidaidien
+              .toUpperCase()
+              .includes(debouncedValue.toUpperCase()) &&
+            u.tencongty.toUpperCase().includes(debouncedTenCongTy.toUpperCase())
         )
       );
     });
     return () => {
       unsubscribe();
     };
-  }, [debouncedValue, unit]);
+  }, [debouncedValue, debouncedTenCongTy, unit]);
 
   return (
     <>
@@ -147,9 +152,24 @@ const UserMage = () => {
                 maxWidth: "75%",
               }}
               value={search}
-              name="search"
               onChange={(e) => setSearch(e.target.value)}
-              id=""
+            />
+          </div>
+          <div
+            className="d-flex align-items-center justify-content-center"
+            style={{
+              marginBottom: "1vh",
+            }}
+          >
+            <input
+              className="form-control form-control-sm"
+              placeholder="Tìm kiếm theo tên công ty ( có dấu )"
+              type="text"
+              style={{
+                maxWidth: "75%",
+              }}
+              value={searchCongTy}
+              onChange={(e) => setSearchCongTy(e.target.value)}
             />
             {/* </div> */}
           </div>

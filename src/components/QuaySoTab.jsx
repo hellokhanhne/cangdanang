@@ -303,7 +303,7 @@ const QuaySoTab = ({ dsTrungGiai }) => {
                       fontWeight: 900,
                     }}
                   >
-                    SỐ MAY MẮN{" "}
+                    SỐ{" "}
                     <span className="text-red cyen">
                       {winer?.somayman || "----------------"}
                     </span>

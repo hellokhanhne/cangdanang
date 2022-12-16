@@ -26,7 +26,7 @@ const ChaoMungComponent = ({ userCurrent }) => {
           lineHeight: 1.2,
         }}
       >
-        {userCurrent?.nguoidaidien || "."}
+        {userCurrent?.nguoidaidien || ".CẤCCSA"}
       </h2>
       <h2
         className="font-large text-center  text-blue"
@@ -37,11 +37,11 @@ const ChaoMungComponent = ({ userCurrent }) => {
           lineHeight: 1.2,
         }}
       >
-        {userCurrent?.chucvu} {userCurrent?.tencongty || "."}
+        {userCurrent?.chucvu} {userCurrent?.tencongty || "SSSS."}
       </h2>
       <div
         style={{
-          maxWidth: "50%",
+          maxWidth: "37.5%",
           marginTop: "1vh",
         }}
       >
@@ -63,7 +63,7 @@ const ChaoMungComponent = ({ userCurrent }) => {
         <div
           className="m-auto  "
           style={{
-            maxWidth: "35%",
+            maxWidth: "40%",
             position: "relative",
           }}
         >

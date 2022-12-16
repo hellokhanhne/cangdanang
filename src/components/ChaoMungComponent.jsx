@@ -26,7 +26,7 @@ const ChaoMungComponent = ({ userCurrent }) => {
           lineHeight: 1.2,
         }}
       >
-        {userCurrent?.nguoidaidien || ".CẤCCSA"}
+        {userCurrent?.nguoidaidien || "."}
       </h2>
       <h2
         className="font-large text-center  text-blue"
@@ -37,7 +37,7 @@ const ChaoMungComponent = ({ userCurrent }) => {
           lineHeight: 1.2,
         }}
       >
-        {userCurrent?.chucvu} {userCurrent?.tencongty || "SSSS."}
+        {userCurrent?.chucvu} {userCurrent?.tencongty || "."}
       </h2>
       <div
         style={{
